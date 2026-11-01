@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -6,17 +5,17 @@ import { FiMapPin, FiStar, FiUsers, FiCheckCircle, FiShield, FiArrowLeft } from 
 import { Button } from '@/components/ui/button';
 import { Studio } from '@/lib/type';
 import EditStudiosDetails from '@/sharedComponents/EditStudiosDetails';
-
+import DeleteStudio from '@/sharedComponents/DeleteStudio';
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 export default async function StudioDetailsPage({ params }: Props) {
-  // Await the params object (Required in Next.js 15+)
+
   const { id } = await params;
 
-  // Fetch the specific studio data from your Express backend
+ 
   const res = await fetch(`http://localhost:8000/studios/${id}`, {
     cache: 'no-store'
   });
@@ -44,7 +43,7 @@ export default async function StudioDetailsPage({ params }: Props) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        {/* Hero Image Section */}
+        
         <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden mb-10 shadow-sm">
           <Image
             src={studio.imageUrl}
@@ -53,28 +52,33 @@ export default async function StudioDetailsPage({ params }: Props) {
             className="object-cover"
             priority
           />
-          <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
+          
+          {/* Top Left: Category Badge */}
+          <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-md z-10">
             <p className="text-sm font-bold text-[#00A5FF] uppercase tracking-wide">
               {studio.category}
             </p>
           </div>
+
+         
+          <div className="absolute top-6 right-6 flex items-center gap-3 z-10">
+            <EditStudiosDetails studio={studio} />
+            <DeleteStudio id={id} />
+          </div>
         </div>
 
-        {/* Content Layout: Details (Left) and Booking Widget (Right) */}
+     
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 relative">
           
-          {/* Left Column: Details */}
+     
           <div className="lg:col-span-2 space-y-10">
             
-            {/* Header Info */}
-           {/* Header Info */}
+       
             <div>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#222222]">
                   {studio.title}
                 </h1>
-                {/* Insert the Edit Button Component Here */}
-                <EditStudiosDetails studio={studio} />
               </div>
               
               <div className="flex flex-wrap items-center gap-6 text-gray-600">
@@ -97,10 +101,10 @@ export default async function StudioDetailsPage({ params }: Props) {
 
             <hr className="border-gray-100" />
 
-            {/* Host Info */}
+      
             <div className="flex items-center gap-4 bg-gray-50 p-6 rounded-2xl border border-gray-100">
               <div className="h-14 w-14 rounded-full bg-[#00A5FF]/10 flex items-center justify-center text-[#00A5FF] font-bold text-xl uppercase">
-                {studio.hostName?.charAt(0)}
+                {studio.hostName?.charAt(0) || 'H'}
               </div>
               <div>
                 <p className="text-lg font-bold text-[#222222]">Hosted by {studio.hostName}</p>
@@ -160,7 +164,7 @@ export default async function StudioDetailsPage({ params }: Props) {
               </Button>
               
               <p className="text-center text-sm text-gray-400 mt-4 font-medium">
-                You won&apost be charged yet
+                You won&apos;t be charged yet
               </p>
             </div>
           </div>

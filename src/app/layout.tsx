@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar/>
         
         {children}
-        <ToastContainer position="bottom-right" theme="colored" />
+        <ToastContainer position="top-center" theme="colored" />
         <Footer></Footer>
         </body>
 
