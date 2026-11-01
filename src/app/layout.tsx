@@ -3,6 +3,9 @@ import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/sharedComponents/Navbar";
 import Footer from "@/sharedComponents/Footer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const workSans = Work_Sans({
@@ -27,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar/>
         
         {children}
+        <ToastContainer position="bottom-right" theme="colored" />
         <Footer></Footer>
         </body>
 
