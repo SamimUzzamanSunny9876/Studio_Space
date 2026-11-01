@@ -33,7 +33,7 @@ const AMENITIES_LIST = [
   'Free Parking', 'Freight Elevator', 'Props Included', 'Coffee/Water Station'
 ];
 
-export default function EditStudioDialog({ studio }: { studio: Studio }) {
+export default function EditStudiosDetails({ studio }: { studio: Studio }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,19 +51,20 @@ export default function EditStudioDialog({ studio }: { studio: Studio }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const {_id, ...updatedFormData}  = formData
 
     try {
       const res = await fetch(`http://localhost:8000/studios/${studio._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(updatedFormData),
       });
 
       if (!res.ok) throw new Error('Update failed');
 
       toast.success('Studio updated successfully!', { theme: 'colored' });
       setOpen(false);
-      router.refresh(); // Refreshes the Server Component to show updated data
+      router.refresh();  
     } catch (error) {
       toast.error('Failed to update studio.', { theme: 'colored' });
     } finally {

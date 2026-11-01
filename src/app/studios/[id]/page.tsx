@@ -1,9 +1,11 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { FiMapPin, FiStar, FiUsers, FiCheckCircle, FiShield, FiArrowLeft } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { Studio } from '@/lib/type';
+import EditStudiosDetails from '@/sharedComponents/EditStudiosDetails';
 
 
 type Props = {
@@ -65,11 +67,14 @@ export default async function StudioDetailsPage({ params }: Props) {
           <div className="lg:col-span-2 space-y-10">
             
             {/* Header Info */}
+           {/* Header Info */}
             <div>
-              <div className="flex items-center justify-between gap-4 mb-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#222222]">
                   {studio.title}
                 </h1>
+                {/* Insert the Edit Button Component Here */}
+                <EditStudiosDetails studio={studio} />
               </div>
               
               <div className="flex flex-wrap items-center gap-6 text-gray-600">
