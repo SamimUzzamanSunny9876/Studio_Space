@@ -93,7 +93,7 @@ export default function AddStudioPage() {
         theme: "colored"
       });
       
-      router.push('/my-listings');
+      router.push('/my-listing');
     } catch (error) {
       toast.error('Failed to add studio. Please try again.', {
         position: "bottom-right",

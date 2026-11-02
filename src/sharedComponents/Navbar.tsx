@@ -23,17 +23,16 @@ export default function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleSignOut = async ()=> {
-     await authClient.signOut()
-  }
+  const handleSignOut = async () => {
+    await authClient.signOut();
+  };
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Explore Studios", href: "/studios" },
-     { name: "My Listing", href: "/my-listing"},
-    { name: "My Bookings", href: "/my-bookings"},
+    { name: "My Listing", href: "/my-listing" },
+    { name: "My Bookings", href: "/my-bookings" },
     { name: "How It Works", href: "/how-it-works" },
-    { name: "About Us", href: "/about-us" }
-   
+    { name: "About Us", href: "/about-us" },
   ];
 
   return (
@@ -63,43 +62,58 @@ export default function Navbar() {
             ))}
           </nav>
 
-
           <div className="hidden md:flex items-center space-x-4">
-           
-           {user? <Popover>
-              <PopoverTrigger render={ <Avatar>
-              <AvatarImage referrerPolicy="no-referrer" src={user?.image as string}  />
-              <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
-            </Avatar>}>
-                Open Popover
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverHeader>
-                  <PopoverTitle className='font-bold'>{user?.name}</PopoverTitle>
-                  <PopoverDescription>
-                    <p>{user?.email}</p>
-                    
-                  </PopoverDescription>
-                  <Link href={'/add-studio'} className="font-bold">Add New Studio</Link>
-                    <Link href={'/my-studio-list'} className="font-bold">My Studio Listings</Link>
-                     <Link href={'/my-bookings'} className="font-bold">My Bookings</Link>
-                     <Button onClick={handleSignOut} variant={"destructive"}>Sign Out</Button>
-                </PopoverHeader>
-              </PopoverContent>
-            </Popover>:  <div className="flex gap-4">
-              <Button
-                variant="outline"
-                className="text-[#222222] border-gray-300"
-              >
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-              <Button className="bg-[#FF6B57] hover:bg-[#e55a47] text-white">
-                <Link href="/sign-up">Sign Up</Link>
-              </Button>
-            </div> }
-
-           
-           
+            {user ? (
+              <Popover>
+                <PopoverTrigger
+                  render={
+                    <Avatar>
+                      <AvatarImage
+                        referrerPolicy="no-referrer"
+                        src={user?.image as string}
+                      />
+                      <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                  }
+                >
+                  Open Popover
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverHeader>
+                    <PopoverTitle className="font-bold">
+                      {user?.name}
+                    </PopoverTitle>
+                    <PopoverDescription>
+                      <p>{user?.email}</p>
+                    </PopoverDescription>
+                    <Link href={"/add-studio"} className="font-bold">
+                      <Button variant={"secondary"}>Add New Studio</Button>
+                    </Link>
+                    <Link href={"/my-studio-list"} className="font-bold">
+                      <Button variant={"secondary"}>My Studio Listings</Button>
+                    </Link>
+                    <Link href={"/my-bookings"} className="font-bold">
+                      <Button variant={"secondary"}>My Bookings</Button>
+                    </Link>
+                    <Button onClick={handleSignOut} variant={"destructive"}>
+                      Sign Out
+                    </Button>
+                  </PopoverHeader>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  className="text-[#222222] border-gray-300"
+                >
+                  <Link href="/sign-in">Sign In</Link>
+                </Button>
+                <Button className="bg-[#FF6B57] hover:bg-[#e55a47] text-white">
+                  <Link href="/sign-up">Sign Up</Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           <div className="md:hidden flex items-center">

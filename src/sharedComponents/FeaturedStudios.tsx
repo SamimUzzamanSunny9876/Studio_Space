@@ -16,7 +16,7 @@ export default async function FeaturedStudios() {
   
   try {
     const res = await fetch('http://localhost:8000/featured-studios', {
-      next: { revalidate: 3600 } 
+      cache: 'no-store' 
     });
     if (res.ok) {
       studios = await res.json();
