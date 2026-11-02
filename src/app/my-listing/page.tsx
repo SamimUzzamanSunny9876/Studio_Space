@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import EditStudiosDetails from '@/sharedComponents/EditStudiosDetails';
 import DeleteStudio from '@/sharedComponents/DeleteStudio';
 import { Studio } from '@/lib/type';
+import { getTokenFromServer } from '@/lib/getTokenFromServer';
 
 export default async function MyListingsPage() {
   const session = await auth.api.getSession({
@@ -14,6 +15,8 @@ export default async function MyListingsPage() {
   });
 
   const user = session?.user;
+
+  const token = await getTokenFromServer()
 
   if (!user) {
     return (
@@ -27,7 +30,10 @@ export default async function MyListingsPage() {
   }
 
   const res = await fetch(`http://localhost:8000/my-studios/${user.email}`, {
-    cache: 'no-store'
+    cache: 'no-store',
+     headers: {
+       authorization: `Bearer ${token}`
+     }
   });
 
   if (!res.ok) {

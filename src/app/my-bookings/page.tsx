@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Booking } from '@/lib/type';
 import CancelBookingButton from '@/sharedComponents/booking/CancelButton';
 import RemoveBookingButton from '@/sharedComponents/booking/RemoveBookingButton';
+import { getTokenFromServer } from '@/lib/getTokenFromServer';
 
 const getStatusBadge = (status: string) => {
   switch (status) {
@@ -32,6 +33,8 @@ export default async function MyBookingsPage() {
 
   const user = session?.user;
 
+  const token = await getTokenFromServer()
+
   if (!user) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50/50">
@@ -45,7 +48,10 @@ export default async function MyBookingsPage() {
 
 
   const res = await fetch(`http://localhost:8000/my-bookings/${user.email}`, {
-    cache: 'no-store'
+    cache: 'no-store',
+    headers: {
+      authorization: `Bearer ${token}`
+    }
   });
   
   const bookings: Booking[] = await res.json();

@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Studio } from '@/lib/type';
+import { getTokenFromClient } from '@/lib/getTokenFromClient';
 
 
 const AMENITIES_LIST = [
@@ -53,10 +54,14 @@ export default function EditStudiosDetails({ studio }: { studio: Studio }) {
     setIsSubmitting(true);
     const {_id, ...updatedFormData}  = formData
 
+    const token = await getTokenFromClient()
+
     try {
       const res = await fetch(`http://localhost:8000/studios/${studio._id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`
+         },
         body: JSON.stringify(updatedFormData),
       });
 

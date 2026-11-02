@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { authClient } from '@/lib/auth-client';
+import { getTokenFromClient } from '@/lib/getTokenFromClient';
 
 const AMENITIES_LIST = [
   'High-Speed WiFi', 'Continuous Lighting', 'Strobe Lights', 'Green Screen',
@@ -28,8 +29,11 @@ export default function AddStudioPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Simulated authenticated user data
-  const user = { name: 'Samim Uzzaman Sunny', email: 'samim@example.com' };
+  const {data:session} = authClient.useSession()
+
+   const sUser = session?.user
+   
+  const user = { name: sUser?.name, email: sUser?.email };
 
   const [formData, setFormData] = useState({
     title: '',
@@ -57,24 +61,27 @@ export default function AddStudioPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const {data, error} = await authClient.token()
+    const token = await getTokenFromClient();
 
-    const token = data?.token
-
-
+   
+    const payload = {
+      ...formData,
+      hostName: user.name,
+      hostEmail: user.email,
+    };
 
     try {
-      // TODO: Replace with your actual Express.js backend POST request to MongoDB
       const res = await fetch('http://localhost:8000/add-studio',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(formData)
-
+        // 2. Send the combined payload instead of just formData
+        body: JSON.stringify(payload)
       });
-      const data = await res.json()
+      
+      const data = await res.json();
       console.log(data);
 
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -86,7 +93,7 @@ export default function AddStudioPage() {
         theme: "colored"
       });
       
-      // router.push('/my-listings');
+      router.push('/my-listings');
     } catch (error) {
       toast.error('Failed to add studio. Please try again.', {
         position: "bottom-right",
