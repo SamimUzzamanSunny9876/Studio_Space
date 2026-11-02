@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Studio } from '@/lib/type';
 import EditStudiosDetails from '@/sharedComponents/EditStudiosDetails';
 import DeleteStudio from '@/sharedComponents/DeleteStudio';
+import BookingCard from '@/sharedComponents/booking/BookingCard';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -159,9 +160,7 @@ export default async function StudioDetailsPage({ params }: Props) {
                 </div>
               </div>
 
-              <Button className="w-full h-14 text-lg font-bold bg-[#FF6B57] hover:bg-[#e55a47] text-white rounded-xl shadow-md shadow-[#FF6B57]/20 transition-all hover:-translate-y-0.5">
-                Reserve Space
-              </Button>
+              <BookingCard studio={studio} />
               
               <p className="text-center text-sm text-gray-400 mt-4 font-medium">
                 You won&apos;t be charged yet
