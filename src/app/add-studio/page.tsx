@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { authClient } from '@/lib/auth-client';
 
 const AMENITIES_LIST = [
   'High-Speed WiFi', 'Continuous Lighting', 'Strobe Lights', 'Green Screen',
@@ -51,16 +52,24 @@ export default function AddStudioPage() {
     }));
   };
 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const {data, error} = await authClient.token()
+
+    const token = data?.token
+
+
 
     try {
       // TODO: Replace with your actual Express.js backend POST request to MongoDB
       const res = await fetch('http://localhost:8000/add-studio',{
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
 
