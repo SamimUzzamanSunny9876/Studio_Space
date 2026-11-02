@@ -7,6 +7,8 @@ import { Studio } from '@/lib/type';
 import EditStudiosDetails from '@/sharedComponents/EditStudiosDetails';
 import DeleteStudio from '@/sharedComponents/DeleteStudio';
 import BookingCard from '@/sharedComponents/booking/BookingCard';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -16,9 +18,20 @@ export default async function StudioDetailsPage({ params }: Props) {
 
   const { id } = await params;
 
+  const jwtToken = await auth.api.getToken({
+    headers: await headers()
+  })
+
+  const token = jwtToken.token
+
+  console.log(jwtToken?.token);
+
  
   const res = await fetch(`http://localhost:8000/studios/${id}`, {
-    cache: 'no-store'
+    cache: 'no-store',
+    headers: {
+      authorization:  `Bearer ${token}`
+    }
   });
 
   if (!res.ok) {
