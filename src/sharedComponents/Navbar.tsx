@@ -29,8 +29,11 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Explore Studios", href: "/studios" },
+     { name: "My Listing", href: "/my-listing"},
+    { name: "My Bookings", href: "/my-bookings"},
     { name: "How It Works", href: "/how-it-works" },
-    { name: "About Us", href: "/about-us" },
+    { name: "About Us", href: "/about-us" }
+   
   ];
 
   return (
@@ -60,7 +63,6 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* working here  */}
 
           <div className="hidden md:flex items-center space-x-4">
            

@@ -55,10 +55,10 @@ export default function SignUpPage() {
         <Card className="bg-white border-gray-200 shadow-xl shadow-gray-200/50 rounded-3xl overflow-hidden">
           <CardHeader className="text-center pb-6 border-b border-gray-50">
             <CardTitle className="text-2xl font-extrabold text-[#222222]">
-              Create an account
+             Log in your account
             </CardTitle>
             <CardDescription className="text-gray-500">
-              Join StudioSpace to book and list premium workspaces
+              Unlock StudioSpace to book and list premium workspaces
             </CardDescription>
           </CardHeader>
 
