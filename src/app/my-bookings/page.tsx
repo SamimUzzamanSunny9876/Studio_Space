@@ -47,7 +47,7 @@ export default async function MyBookingsPage() {
   }
 
 
-  const res = await fetch(`http://localhost:8000/my-bookings/${user.email}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-bookings/${user.email}`, {
     cache: 'no-store',
     headers: {
       authorization: `Bearer ${token}`

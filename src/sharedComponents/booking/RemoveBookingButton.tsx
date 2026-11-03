@@ -10,7 +10,7 @@ export default function RemoveBookingButton({ bookingId }: { bookingId: string }
 
   const handleRemove = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/bookings/${bookingId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${bookingId}`, {
         method: 'DELETE',
       });
 

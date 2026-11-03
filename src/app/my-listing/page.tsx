@@ -29,7 +29,7 @@ export default async function MyListingsPage() {
     );
   }
 
-  const res = await fetch(`http://localhost:8000/my-studios/${user.email}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-studios/${user.email}`, {
     cache: 'no-store',
      headers: {
        authorization: `Bearer ${token}`
