@@ -56,6 +56,12 @@ export default function SignUpPage() {
   });
   console.log(data);
   }
+  const handleGithubSignUp = async() =>{
+     const data = await authClient.signIn.social({
+        provider: "github"
+    });
+
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50/50 py-12 px-4 sm:px-6 lg:px-8">
@@ -78,6 +84,7 @@ export default function SignUpPage() {
                     variant="outline"
                     type="button"
                     className="w-full gap-2 text-gray-700 hover:bg-gray-50 rounded-xl"
+                    onClick={handleGithubSignUp}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
