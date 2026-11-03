@@ -57,7 +57,7 @@ export default function EditStudiosDetails({ studio }: { studio: Studio }) {
     const token = await getTokenFromClient()
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${studio._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studios/${studio._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json',
           authorization: `Bearer ${token}`
