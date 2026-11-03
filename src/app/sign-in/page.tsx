@@ -49,6 +49,13 @@ export default function SignUpPage() {
     }
   };
 
+  const handleGoogleSignIn = async () =>{
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  console.log(data);
+  }
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50/50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-6">
@@ -87,6 +94,7 @@ export default function SignUpPage() {
                     variant="outline"
                     type="button"
                     className="w-full gap-2 text-gray-700 hover:bg-gray-50 rounded-xl"
+                    onClick={handleGoogleSignIn}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
