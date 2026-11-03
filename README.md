@@ -1,37 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StudioSpace - Frontend Application 🎨
 
-## Getting Started
+StudioSpace is a full-stack workspace booking platform designed to connect visionary creators (photographers, filmmakers, podcasters) with local studio hosts. This repository contains the Next.js frontend, featuring a responsive, dual-sided marketplace interface that caters to both guests making reservations and hosts managing their creative real estate.
 
-First, run the development server:
+## 🚀 Detailed Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Creator Experience (Guests)
+* **Workspace Discovery:** Browse top-rated and newly added studios through interactive, responsive grids and Shadcn UI carousels.
+* **Studio Details & Booking:** View comprehensive studio pages with full amenities lists, host details, and a streamlined booking form that automatically calculates hourly rates and security deposits.
+* **My Bookings Dashboard:** A private dashboard to track all reservations. Features dynamic status badges (Pending, Confirmed, Completed, Cancelled), the ability to cancel pending requests, and options to permanently remove cancelled trips from history.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Host Experience (Owners)
+* **Listing Creation:** A comprehensive multi-step form to upload studio details, set pricing, define max capacity, and select amenities.
+* **My Listings Dashboard:** A dedicated management interface where hosts can view all their active properties.
+* **Real-time Management:** Edit existing studio details or delete listings entirely, complete with confirmation modals and instant UI updates.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### UI/UX & Architecture
+* **Authentication:** Secure user sessions and protected route handling managed by `better-auth`.
+* **State & Feedback:** Integrated `react-toastify` for immediate success/error feedback on all CRUD operations.
+* **Custom Routing States:** Branded global loading spinners for asynchronous data fetching and custom 404 error pages for broken routes.
+* **Modern Design System:** Built utilizing a cohesive color palette (Coral and Blue), Tailwind CSS utility classes, and accessible Radix UI components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💻 Tech Stack
 
-## Learn More
+* **Framework:** Next.js 15 (App Router)
+* **Library:** React 19
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Components:** Shadcn UI & Radix UI
+* **Icons:** React Icons
+* **Notifications:** React Toastify
+* **Authentication:** Better Auth & `jose`
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Local Development Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
+* Node.js (v18 or higher)
+* Git
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Installation
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Studio_Space
+1. Clone the repository and navigate to the frontend directory:
+   ```bash
+   cd studio_space_client
